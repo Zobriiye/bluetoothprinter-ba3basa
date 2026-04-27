@@ -7,73 +7,76 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="ticket" id="ticket">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <p id="companyName"></p>
-    <p id="customer"></p>
-    <p id="date" style="display:none"></p>
+    <div class="ticket" id="ticket">
+        <p id="companyName"></p>
+        <p id="customer"></p>
+        <p id="date" style="display:none"></p>
 
-    <hr>
-
-    <table>
-        <thead>
-            <tr>
-                <th class="qty">Q</th>
-                <th class="desc">Item</th>
-                <th id="lbpColumn" class="price">LL</th>
-                <th id="usdColumn" class="price">USD</th>
-            </tr>
-        </thead>
-        <tbody id="tableBod"></tbody>
-    </table>
-
-    <hr>
-
-    <div id="potsSection">
-        <table><tbody>
-            <tr>
-                <td style="text-align:left;font-weight:700;">Pots Left</td>
-                <td id="potsRemainingLarge"></td>
-                <td id="potsRemainingMedium"></td>
-            </tr>
-        </tbody></table>
         <hr>
-    </div>
 
-    <table class="totals-table"><tbody>
-        <tr id="lbpTotalRow">
-            <td>Total LL</td>
-            <td id="totalpricelbp"></td>
-        </tr>
-        <tr id="usdTotalRow">
-            <td>Total USD</td>
-            <td id="totalpriceusd"></td>
-        </tr>
-    </tbody></table>
+        <table>
+            <thead>
+                <tr>
+                    <th class="qty">Q</th>
+                    <th class="desc">Item</th>
+                    <th id="lbpColumn" class="price">LL</th>
+                    <th id="usdColumn" class="price">USD</th>
+                </tr>
+            </thead>
+            <tbody id="tableBod"></tbody>
+        </table>
 
-    <div id="paidLeftSection">
         <hr>
+
+        <div id="potsSection">
+            <table><tbody>
+                <tr>
+                    <td style="text-align:left;font-weight:700;">Pots Left</td>
+                    <td id="potsRemainingLarge"></td>
+                    <td id="potsRemainingMedium"></td>
+                </tr>
+            </tbody></table>
+            <hr>
+        </div>
+
         <table class="totals-table"><tbody>
-            <tr>
-                <td>Paid (USD)</td>
-                <td id="amountPaid"></td>
+            <tr id="lbpTotalRow">
+                <td>Total LL</td>
+                <td id="totalpricelbp"></td>
             </tr>
-            <tr>
-                <td>Paid (LL)</td>
-                <td id="amountPaidLbp"></td>
-            </tr>
-            <tr>
-                <td>Balance</td>
-                <td id="amountLeft"></td>
+            <tr id="usdTotalRow">
+                <td>Total USD</td>
+                <td id="totalpriceusd"></td>
             </tr>
         </tbody></table>
+
+        <div id="paidLeftSection">
+            <hr>
+            <table class="totals-table"><tbody>
+                <tr>
+                    <td>Paid (USD)</td>
+                    <td id="amountPaid"></td>
+                </tr>
+                <tr>
+                    <td>Paid (LL)</td>
+                    <td id="amountPaidLbp"></td>
+                </tr>
+                <tr>
+                    <td>Balance</td>
+                    <td id="amountLeft"></td>
+                </tr>
+            </tbody></table>
+        </div>
+
+        <hr>
+        <p class="footer">Thank you!</p>
+        <p id="phoneNumber"></p>
     </div>
-
-    <hr>
-    <p class="footer">Thank you!</p>
-    <p id="phoneNumber"></p>
-
-</div>
-<script src="index.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
