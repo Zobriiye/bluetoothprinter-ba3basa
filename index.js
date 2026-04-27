@@ -1,4 +1,6 @@
 const main = () => {
+    window.jsPDF = window.jspdf.jsPDF;
+    
     const params = Object.fromEntries(new URLSearchParams(window.location.search));
     const split = (key) => (params[key] || "").split(",").map(s => s.trim());
 
@@ -79,23 +81,12 @@ const main = () => {
         if (tusd) tusd.innerHTML = totalusd;
     }
 
-    // Ticket width - force 58mm if not specified
+    // Ticket width
     const ticket = $("ticket");
-    const targetWidth = pagewidth || "58mm";
-    
-    if (ticket) {
-        ticket.style.width = targetWidth;
-        ticket.style.maxWidth = targetWidth;
-        ticket.style.minWidth = targetWidth;
+    if (pagewidth && ticket) {
+        ticket.style.width = pagewidth;
+        ticket.style.maxWidth = pagewidth;
     }
-    
-    // Force body and html width
-    document.body.style.width = targetWidth;
-    document.body.style.minWidth = targetWidth;
-    document.body.style.maxWidth = targetWidth;
-    document.documentElement.style.width = targetWidth;
-    document.documentElement.style.minWidth = targetWidth;
-    document.documentElement.style.maxWidth = targetWidth;
 
     // Rows
     const tbody = $("tableBod");
@@ -108,95 +99,29 @@ const main = () => {
         </tr>`;
     });
 
-    // Update viewport meta for print
-    const viewportMeta = document.querySelector('meta[name="viewport"]');
-    if (viewportMeta) {
-        viewportMeta.setAttribute('content', 'width=58mm, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-    }
-    
-    // Add a style element to enforce width during print
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `
-        @media print {
-            @page { size: ${targetWidth} auto; margin: 0; }
-            html, body { width: ${targetWidth} !important; min-width: ${targetWidth} !important; max-width: ${targetWidth} !important; }
-        }
-    `;
-    document.head.appendChild(styleEl);
-
-    // Create iframe for printing to bypass browser scaling
+    // Generate PDF with exact ticket size and send to rawbt
     setTimeout(() => {
-        const ticketContent = document.getElementById('ticket').outerHTML;
-        const styles = document.querySelector('style') ? document.querySelector('style').outerHTML : '';
-        const allStyles = document.querySelectorAll('style');
-        let allStylesContent = '';
-        allStyles.forEach(style => {
-            allStylesContent += style.outerHTML;
+        const ticket = $("ticket");
+        const width = ticket.clientWidth;
+        const height = ticket.clientHeight;
+        
+        const doc = new jsPDF({
+            orientation: height > width ? "p" : "l",
+            unit: "px",
+            format: [width, height]
         });
         
-        // Get the linked stylesheet content
-        const linkedStyles = document.querySelector('link[rel="stylesheet"]');
-        let linkedStylesHref = '';
-        if (linkedStyles) {
-            linkedStylesHref = linkedStyles.href;
-        }
-        
-        const printWindow = window.open('', '_blank', 'width=250,height=800');
-        
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=58mm, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-                <link rel="stylesheet" href="${linkedStylesHref}">
-                <style>
-                    @page { 
-                        size: ${targetWidth} auto; 
-                        margin: 0; 
-                    }
-                    
-                    html, body { 
-                        width: ${targetWidth} !important; 
-                        min-width: ${targetWidth} !important;
-                        max-width: ${targetWidth} !important;
-                        margin: 0 !important; 
-                        padding: 0 !important;
-                    }
-                    
-                    body {
-                        font-family: 'Courier New', Courier, monospace;
-                        font-size: 10px;
-                        background: #fff;
-                    }
-                    
-                    .ticket {
-                        width: ${targetWidth} !important;
-                        min-width: ${targetWidth} !important;
-                        max-width: ${targetWidth} !important;
-                        padding: 4px 6px 8px 6px;
-                    }
-                    
-                    ${allStylesContent}
-                </style>
-            </head>
-            <body>
-                ${ticketContent}
-            </body>
-            </html>
-        `);
-        
-        printWindow.document.close();
-        printWindow.focus();
-        
-        // Wait for content to load then print
-        setTimeout(() => {
-            printWindow.print();
-            setTimeout(() => {
-                printWindow.close();
-            }, 500);
-        }, 500);
-    }, 300);
+        doc.html(ticket, {
+            callback: function (doc) {
+                const base64Full = doc.output('datauri');
+                window.location.href = "rawbt:data:application/pdf;base64," + base64Full.split("base64,")[1];
+            },
+            x: 0,
+            y: 0,
+            width: width,
+            windowWidth: width
+        });
+    }, 500);
 };
 
 main();
