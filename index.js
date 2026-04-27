@@ -96,7 +96,12 @@ const main = () => {
             ${target !== "LBP" ? `<td class="price">${unitpriceusd}</td>` : ""}
         </tr>`;
     });
-// Replace window.print(); with:
+// Add this right before window.print()
+const viewportMeta = document.querySelector('meta[name="viewport"]');
+if (viewportMeta) {
+    viewportMeta.content = 'width=58mm, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+}
+
 setTimeout(() => {
     window.print();
 }, 300);
