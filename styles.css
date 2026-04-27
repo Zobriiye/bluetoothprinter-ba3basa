@@ -10,6 +10,32 @@ body {
     background: #fff;
 }
 
+@media print {
+    body { 
+        margin: 0; 
+        padding: 0;
+        width: 58mm;
+    }
+    
+    @page {
+        size: 58mm auto;
+        margin: 0;
+    }
+    
+    html, body {
+        width: 58mm;
+    }
+    
+    .ticket {
+        width: 58mm;
+        max-width: 58mm;
+    }
+    
+    .hidden-print, .hidden-print * { 
+        display: none !important; 
+    }
+}
+
 .ticket {
     width: 58mm;
     max-width: 58mm;
