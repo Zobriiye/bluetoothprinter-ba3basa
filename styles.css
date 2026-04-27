@@ -4,11 +4,17 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 58mm;
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 10px;
     background: #fff;
     width: 58mm;
+    margin: 0;
+    padding: 0;
 }
 
 .ticket {
@@ -125,28 +131,20 @@ tbody tr:last-child td {
         margin: 0;
     }
     
-    html {
-        width: 58mm;
-        margin: 0;
-        padding: 0;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-    
-    body {
-        width: 58mm;
-        margin: 0;
-        padding: 0;
-        zoom: 100%;
+    html, body {
+        width: 58mm !important;
+        min-width: 58mm !important;
+        max-width: 58mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
     
     .ticket {
-        width: 58mm;
-        max-width: 58mm;
-        transform: scale(1);
-        transform-origin: top left;
+        width: 58mm !important;
+        min-width: 58mm !important;
+        max-width: 58mm !important;
     }
     
     .hidden-print, .hidden-print * { 
