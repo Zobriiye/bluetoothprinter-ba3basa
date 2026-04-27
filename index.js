@@ -96,8 +96,11 @@ const main = () => {
             ${target !== "LBP" ? `<td class="price">${unitpriceusd}</td>` : ""}
         </tr>`;
     });
-
+// Replace window.print(); with:
+setTimeout(() => {
     window.print();
+}, 300);
+    
 };
 
 main();
