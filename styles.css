@@ -4,17 +4,10 @@
     box-sizing: border-box;
 }
 
-html {
-    width: 58mm;
-}
-
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 10px;
     background: #fff;
-    width: 58mm;
-    margin: 0;
-    padding: 0;
 }
 
 .ticket {
@@ -126,27 +119,6 @@ tbody tr:last-child td {
 }
 
 @media print {
-    @page {
-        size: 58mm auto;
-        margin: 0;
-    }
-    
-    html, body {
-        width: 58mm !important;
-        min-width: 58mm !important;
-        max-width: 58mm !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-    
-    .ticket {
-        width: 58mm !important;
-        min-width: 58mm !important;
-        max-width: 58mm !important;
-    }
-    
     .hidden-print, .hidden-print * { 
         display: none !important; 
     }
