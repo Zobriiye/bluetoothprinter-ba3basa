@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    background: #fff;
+    color: #000;
+}
+
+.ticket {
+    width: 58mm;
+    max-width: 58mm;
+    padding: 4px 4px 10px 4px;
+}
+
+#companyName {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+#customer {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+/* ── Main items table ── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier New', Courier, monospace;
+    table-layout: fixed;
+}
+
+thead th {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    padding: 3px 2px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+th.quantity, td.quantity {
+    width: 8%;
+    text-align: center;
+}
+
+th.description, td.description {
+    width: 46%;
+    text-align: left;
+    padding-left: 2px;
+    word-break: break-word;
+}
+
+th.price, td.price {
+    width: 23%;
+    text-align: right;
+    padding-right: 2px;
+}
+
+tbody td {
+    padding: 4px 2px;
+    font-size: 13px;
+    vertical-align: middle;
+    border-bottom: 1px solid #aaa;
+}
+
+/* thick separator after last item row */
+tbody tr:last-child td {
+    border-bottom: 2px solid #000;
+}
+
+/* ── Totals section ── */
+.centered {
+    text-align: center;
+}
+
+.centered > table {
+    table-layout: auto;
+}
+
+#lbpTotalRow td,
+#usdTotalRow td {
+    padding: 4px 4px;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    text-align: left;
+}
+
+#lbpTotalRow td:last-child,
+#usdTotalRow td:last-child {
+    text-align: right;
+}
+
+#usdTotalRow td {
+    border-top: 2px solid #000;
+}
+
+#lbpTotalRow td {
+    border-bottom: 2px solid #000;
+}
+
+/* ── Pots section ── */
+#potsSection td {
+    font-size: 13px;
+    padding: 3px 2px;
+    border: none;
+    text-align: center;
+}
+
+/* ── Footer ── */
+.ticket > p.centered {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#phoneNumber {
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.end-line {
+    border: none;
+    border-top: 4px solid #000;
+    margin-top: 8px;
+}
+
+@media print {
+    .hidden-print, .hidden-print * {
+        display: none !important;
+    }
+}
