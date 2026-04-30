@@ -59,6 +59,7 @@ const main = () => {
     );
     const lbpColumn = document.querySelector("#lbpColumn")
     const usdColumn = document.querySelector("#usdColumn")
+    const unitPriceColumn = document.querySelector("#unitPriceColumn")
     const lbpTotalRow = document.querySelector("#lbpTotalRow")
     const usdTotalRow = document.querySelector("#usdTotalRow")
     const customerPart = document.querySelector("#customer");
@@ -123,11 +124,13 @@ const main = () => {
     const tableBody = document.querySelector("#tableBod");
 
     prodArr.forEach((product) => {
+        let unitPrice = target === "LBP" ? product.unitpricelbp : product.unitpriceusd;
         let lbpCell = target === "LBP" ? '<td class="price">' + product.unitpricelbp + '</td>' : '';
         let usdCell = (!target || target === "USD") ? '<td class="price">' + product.unitpriceusd + '</td>' : '';
         tableBody.innerHTML += '<tr>' +
             '<td class="quantity">' + product.quantity + '</td>' +
             '<td class="description">' + product.name + '</td>' +
+            '<td class="price">' + unitPrice + '</td>' +
             lbpCell +
             usdCell +
             '</tr>';
